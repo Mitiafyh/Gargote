@@ -54,3 +54,22 @@ Trois données absurdes que le schéma actuel accepte sans broncher
     2-on peut donner tout les numero de tables qu'on veut : on peut passer une commande a une table numéro 10000 (sans meme savoir si elle existe)
     3-losqu'on supprime ou modifie un plat, on n'a pas l'historique des valeurs des anciens plats /et commandes
 
+## 0.3 Interroger l’API à la main
+5- Pour la requête b,  code = 201 
+on n'a pas obtenu 200 car c'est une création
+
+6-Pour la requête d, la suppression est blocké par PostgreSQL 
+ligne de code qui transforme ce blocage en réponse 409:
+``` javascript
+    return $this->erreur('Ce plat figure déjà dans des commandes, il ne peut pas être supprimé.', 409);
+```
+
+7-Creation d'une commande avec curl (table 6, deux Romazava et un Café). 
+
+curl -i -X POST http://localhost:8080/api/commandes \
+     -H "Content-Type: application/json" \
+     -d '{ "numero_table": 6,
+           "lignes": [
+                {"id_plat": 4, "quantite":2},
+                {"id_plat": 10, "quantite":1} ] }'
+
