@@ -1,3 +1,4 @@
+-- Active: 1792657013409@@127.0.0.1@5432@gargote
 -- =============================================================
 --  Gargote — schéma de base (version fournie, NIVEAU 0)
 --  SGBD : PostgreSQL
