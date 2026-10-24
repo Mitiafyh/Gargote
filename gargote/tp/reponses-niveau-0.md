@@ -73,3 +73,21 @@ curl -i -X POST http://localhost:8080/api/commandes \
                 {"id_plat": 4, "quantite":2},
                 {"id_plat": 10, "quantite":1} ] }'
 
+## 0.4 Suivre une requête de bout en bout
+
+| # | Étape | Fichier | Fonction / ligne |
+|---|---|---|---|
+| 1 | Le formulaire est soumis | `components/PlatForm.vue` |enregistrer() |
+| 2 | La requête HTTP est construite |api.js | `requete('POST', '/plats', plat)` |
+| 3 | Vite transmet `/api/...` au port 8080 |vite.config.js | '/api': 'http://localhost:8080',|
+| 4 | CodeIgniter choisit le contrôleur |app/config/routes.php | $routes->post('plats', 'Plats::create');|
+| 5 | Le contrôleur lit le JSON |app/controllers/Plats.php | $donnees = $this->donneesJson(); |
+| 6 | Les règles de validation sont vérifiées |app/controllers/Plats.php | return $this->erreurValidation($this->plats->errors()); |
+| 7 | La ligne est insérée | app/controllers/Plats.php|return $this->respondCreated($this->plats->find($id)); |
+| 8 | Le formulaire prévient l’écran parent | | `emit('enregistre', resultat)` |
+| 9 | L’écran recharge la liste | `views/CarteView.vue` |charger() |
+
+8. Le code métier de la création d’une commande se trouve dans Services/CommandeService.php
+Il n’est pas dans le contrôleur `Commandes.php`  car 
+ * Le contrôleur reçoit la requête HTTP et renvoie la réponse ;
+ * le service décide si l'opération est permise et l'exécute.
