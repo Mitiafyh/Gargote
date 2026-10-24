@@ -8,3 +8,8 @@
 
 **vérification:**  La seconde exécution échoue, c'est normal mon script ajoute des colonnes sans vérifier elles existent déjà donc lors de la deuxième exécution, PostgreSQL signale qu'ils existent déjà.
 
+### 1.2 Données de test
+3. Insertion d'un plat à 0 Ar
+->new row for relation "plat" violates check constraint "ck_plat_prix"
+Insertion dun plat dont le nom existe déjà 
+->duplicate key value violates unique constraint "uq_plat_nom"
