@@ -1,3 +1,4 @@
+-- Active: 1792846640284@@127.0.0.1@5432@gargote
 -- =============================================================
 --  Gargote — données de démonstration (NIVEAU 0)
 --  À exécuter après 01_schema.sql
@@ -27,3 +28,5 @@ INSERT INTO commande_ligne (id_commande, id_plat, quantite, prix_unitaire) VALUE
     (1, 8, 2,  500),
     (2, 6, 1, 6000),
     (2, 10, 1, 1000);
+
+INSERT INTO categorie (libelle) VALUES ('Goûter');

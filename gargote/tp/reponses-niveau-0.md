@@ -111,3 +111,9 @@ Il n’est pas dans le contrôleur `Commandes.php`  car
 10. Dans `PlatForm.vue`, le `watch` surveille les changements de la valeur de props.plat. 
 
 Sans lui quand on clique sur **Modifier** d’un autre plat ,il ne met à jour les champs du formulaire ce qui fait que c'est encore l'ancien plat qui sera  affiché
+
+## 0.6 Premières modification
+
+La catégorie apparaît dans la liste déroulante du formulaire sans que vous ayez écrit de code. Expliquez pourquoi, en citant la route et le composant concernés.
+
+11.La catégorie apparaît dans la liste déroulante du formulaire sans que vous ayez écrit de code car le composant `PlatForm.vue` utilise la route `/api/categories` pour récupérer la liste des catégories.  `Categories.php`, qui renvoie les données des catégories et le composant utilise ensuite ces données pour remplir la liste déroulante automatiquement.
