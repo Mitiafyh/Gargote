@@ -91,3 +91,23 @@ curl -i -X POST http://localhost:8080/api/commandes \
 Il n’est pas dans le contrôleur `Commandes.php`  car 
  * Le contrôleur reçoit la requête HTTP et renvoie la réponse ;
  * le service décide si l'opération est permise et l'exécute.
+
+## 0.5 Repérer les notions de Vue
+
+
+| Notion | À quoi ça sert  | Fichier | ligne | explication
+|---|---|---|---|---|
+| `ref()` | une variable dont le changement met l’écran à jour |views/CarteView.vue | const plats = ref([])|lorsqu'il y a un changement par rapport aux données des plats (suppression/ajout), la valeurs de plats est automatiquement mis à jour(la liste aussi)|
+| `computed()` | une valeur calculée à partir d’autres, recalculée automatiquement |components/Panier.vue | const total = computed(() => props.lignes.reduce((somme, l) => somme + l.plat.prix * l.quantite, 0))|Calcule automatiquement le montant total du panier en additionnant le prix total de chaque plat |
+| `v-for` | répéter un élément pour chaque élément d’une liste |components/Panier.vue|<li v-for="ligne in lignes":key="ligne.plat.id" .class="panier-ligne"> | lister tous les lignes (plats) du panier |
+| `v-if` / `v-else` | afficher un élément seulement si une condition est vraie |components/Panier.vue |<p v-if="lignes.length === 0" class="vide">Touchez un plat de la carte pour l’ajouter.</p><ul. v-else class="panier-liste">... </ul> |Si le panier est vide, affiche un message. Sinon, affiche la liste des plats.|
+| `v-model` | lier un champ de formulaire à une variable, dans les deux sens | views/CommandeView.vue | <input. v-model.number="numeroTable" type="number" min="1" /> | Lorsque l'utilisateur saisit un numero, numeroTable est mis à jour|
+| `defineProps` | recevoir des données du composant parent | components/CommandeDetail.vue| defineProps({commande: { type: Object, required: true },})| recoir la valeur d'une commande venant d'une liste de commandes |
+| `defineEmits` / `emit` | envoyer un événement au composant parent |components/PlatList.vue |const emit = defineEmits(['modifier', 'supprimer'])| Déclare les événements modifier et supprimer|
+| `onMounted` | exécuter du code quand le composant apparaît | views/commandeView.vue|onMounted(async () => { plats.value = await api.plats.lister() })|appele la fonction lister() lorsque l'écran est chargé afin de récupérer les plats|
+
+9. `Panier.vue` ne modifie jamais la quantité lui-même  pour separer l'affichage de la gestion de ses données. C'est le composant parent qui modifie réellement la quantité.
+
+10. Dans `PlatForm.vue`, le `watch` surveille les changements de la valeur de props.plat. 
+
+Sans lui quand on clique sur **Modifier** d’un autre plat ,il ne met à jour les champs du formulaire ce qui fait que c'est encore l'ancien plat qui sera  affiché
