@@ -13,3 +13,5 @@
 ->new row for relation "plat" violates check constraint "ck_plat_prix"
 Insertion dun plat dont le nom existe déjà 
 ->duplicate key value violates unique constraint "uq_plat_nom"
+
+## B. API et code métier

@@ -38,8 +38,19 @@ export const api = {
   },
 
   plats: {
-    lister: (idCategorie) =>
-      requete('GET', idCategorie ? `/plats?categorie=${idCategorie}` : '/plats'),
+    lister: (idCategorie = null, disponible = null) => {
+      const params = new URLSearchParams()
+      
+      if (idCategorie !== null && idCategorie !== '') {
+        params.append('categorie', idCategorie)
+      }
+      if (disponible !== null) {
+        params.append('disponible', disponible)
+      }
+      
+      const query = params.toString()
+      return requete('GET', query ? `/plats?${query}` : '/plats')
+    },
     creer: (plat) => requete('POST', '/plats', plat),
     modifier: (id, plat) => requete('PUT', `/plats/${id}`, plat),
     supprimer: (id) => requete('DELETE', `/plats/${id}`),

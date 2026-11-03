@@ -8,11 +8,13 @@ const plats = ref([])
 const categories = ref([])
 const platSelectionne = ref(null) // plat en cours de modification
 const message = ref(null)         // { type: 'succes' | 'erreur', texte }
+const disponible = ref(false)
 
 async function charger() {
   try {
+    const filtreDispo = disponible.value ? 1 : null
     ;[plats.value, categories.value] = await Promise.all([
-      api.plats.lister(),
+      api.plats.lister(null,filtreDispo),
       api.categories.lister(),
     ])
   } catch (e) {
