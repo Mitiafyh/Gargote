@@ -15,3 +15,6 @@ Insertion dun plat dont le nom existe déjà
 ->duplicate key value violates unique constraint "uq_plat_nom"
 
 ## B. API et code métier
+### 1.5 Le plat du jour
+4. 422 est pour marquer des données invalides alors qu'ici les données sont valides mais il y a un conflit avec l'état actuel du plat qui est épuisé ce qui fait que R2 renvoie 409.
+5. Si Bao marque comme épuisé le plat qui est déjà plat du jour  le plat se retire du plat du jour car comme on a la règle qu'un plat épuisé ne peut pas devenir plat du jour donc un plat du jour épuisé n'est plus un plat du jour.
