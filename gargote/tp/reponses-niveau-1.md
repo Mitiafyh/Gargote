@@ -197,3 +197,41 @@ Debugbar-Link: http://localhost:8080/index.php?debugbar_time=1793798304.814808
 ```
 6. Avant la règle is_not_unique, la quatrième requête renvoyait 500 car postgreSQL refusait d'inserer le plat à cause de la contrainte de clé étrangère et puisque php ne sait gerer cette erreur alors le serveur renvoie 500. 
 C'est postgreSQL détectait l’erreur mais c'est  un problème de laisser PostgreSQL la détecter seul car l'utilisateur ne comprends pas l'erreur alors on a besoin de la règle is_not_unique pour que php détecte l'erreur et renvoie 422 avec un message compréhensible pour l'utilisateur.
+
+## D. Interface Vue
+
+7. Oui, Si l’on désactive le bouton dans l’interface, un plat épuisé peut quand même être commandé.
+
+```javascript 
+curl -i -X POST http://localhost:8080/api/commandes \\
+     -H "Content-Type: application/json" \
+     -d '{ "numero_table": 6,
+           "lignes": [
+                {"id_plat": 7, "quantite":1} ] }'
+HTTP/1.1 201 Created
+Host: localhost:8080
+Date: Wed, 04 Nov 2026 18:26:23 GMT
+Connection: close
+X-Powered-By: PHP/8.3.36
+Cache-Control: no-store, max-age=0, no-cache
+Content-Type: application/json; charset=UTF-8
+Debugbar-Time: 1793816783.470289
+Debugbar-Link: http://localhost:8080/index.php?debugbar_time=1793816783.470289
+
+{
+    "id": 3,
+    "date_commande": "2026-11-04 21:26:23",
+    "numero_table": 6,
+    "lignes": [
+        {
+            "id": 5,
+            "id_plat": 7,
+            "plat": "Mi sao",
+            "quantite": 1,
+            "prix_unitaire": 6500,
+            "sous_total": 6500
+        }
+    ],
+    "total": 6500
+}
+```

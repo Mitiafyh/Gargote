@@ -56,7 +56,7 @@ async function envoyer() {
         <h3 class="ardoise-titre">{{ categorie }}</h3>
         <ul class="ardoise-liste">
           <li v-for="plat in liste" :key="plat.id">
-            <button class="ardoise-ligne ardoise-choix" @click="ajouter(plat)">
+            <button class="ardoise-ligne ardoise-choix" @click="ajouter(plat)" :disabled="!plat.disponible">
               <span class="plat-nom">{{ plat.nom }}</span>
               <span class="plat-pointilles" aria-hidden="true"></span>
               <span class="plat-prix">{{ ariary(plat.prix) }}</span>

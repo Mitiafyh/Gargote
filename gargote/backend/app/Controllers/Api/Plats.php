@@ -83,4 +83,22 @@ class Plats extends ApiController
 
         return $this->respondDeleted(['id' => (int) $id]);
     }
+
+   
+    public function basculer($id)
+    {
+        $plat = $this->plats->find($id);
+        if (! $plat) {
+            return $this->erreur("Plat $id introuvable.", 404);
+        }
+
+        $nouvelleDisponibilite = !$plat['disponible'];
+
+        if (! $this->plats->update($id, ['disponible' => $nouvelleDisponibilite])) {
+            return $this->erreurValidation($this->plats->errors());
+        }
+
+        return $this->respond($this->plats->find($id));
+    }
+
 }

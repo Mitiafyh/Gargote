@@ -21,6 +21,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     $routes->post('plats', 'Plats::create');
     $routes->put('plats/(:num)', 'Plats::update/$1');
     $routes->delete('plats/(:num)', 'Plats::delete/$1');
+    $routes->patch('plats/(:num)/basculer', 'Plats::basculer/$1');
 
     // Commandes
     $routes->get('commandes', 'Commandes::index');

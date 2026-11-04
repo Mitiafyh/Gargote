@@ -127,6 +127,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, tr:focus-visibl
 .plat-pointilles { flex: 1; border-bottom: 2px dotted rgba(243, 244, 239, 0.35); }
 .plat-prix { font-weight: 600; white-space: nowrap; }
 .plat-actions { display: flex; gap: 0.5rem; margin-left: 0.75rem; }
+.plat-description { font-size: 0.85rem;color: #838080;}
+.plat-infos { display: flex; flex-direction: column; }
+.plat-nom-barre { text-decoration: line-through;color: #838080; }
+.plat-badge{ border-radius: 4px; background-color: #b23a26; width: fit-content;}
 
 /* Dans l’écran Commande, chaque ligne de l’ardoise est un bouton */
 .ardoise-choix {

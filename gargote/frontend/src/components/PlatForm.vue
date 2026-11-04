@@ -22,7 +22,7 @@ watch(
   () => props.plat,
   (plat) => {
     form.value = plat
-      ? { nom: plat.nom, prix: plat.prix, id_categorie: plat.id_categorie }
+      ? { nom: plat.nom, prix: plat.prix, id_categorie: plat.id_categorie , description: plat.description , disponible: plat.disponible }
       : formulaireVide()
     erreurs.value = {}
     message.value = ''
@@ -79,6 +79,16 @@ async function enregistrer() {
       </select>
       <small v-if="erreurs.id_categorie" class="erreur">{{ erreurs.id_categorie }}</small>
     </label>
+    
+    <label class="champ">
+      <span>Description</span>
+      <textarea v-model.trim="form.description" name="description" id="" placeholder="Ex. : Un plat délicieux"></textarea>
+      <small v-if="erreurs.description" class="erreur">{{ erreurs.description }}</small>
+    </label>
+
+    <span><strong>Disponible</strong></span>
+    <input v-model="form.disponible" type="checkbox" />
+    <small v-if="erreurs.disponible" class="erreur">{{ erreurs.disponible }}</small>
 
     <div class="boutons">
       <button type="submit" class="bouton" :disabled="enCours">

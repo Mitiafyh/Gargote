@@ -54,6 +54,7 @@ export const api = {
     creer: (plat) => requete('POST', '/plats', plat),
     modifier: (id, plat) => requete('PUT', `/plats/${id}`, plat),
     supprimer: (id) => requete('DELETE', `/plats/${id}`),
+    basculer: (id) => requete('PATCH', `/plats/${id}/basculer`),
   },
 
   commandes: {
@@ -61,4 +62,11 @@ export const api = {
     detail: (id) => requete('GET', `/commandes/${id}`),
     creer: (commande) => requete('POST', '/commandes', commande),
   },
+
+  platDuJour: {
+    lire: () => requete('GET', '/plat-du-jour'),
+    definir:(idPlat) => requete('PUT', '/plat-du-jour', { id_plat: idPlat }),
+    historique: () => requete('GET', '/plat-du-jour/historique'),
+  },
+  
 }
