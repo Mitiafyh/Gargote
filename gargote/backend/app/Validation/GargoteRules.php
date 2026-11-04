@@ -30,4 +30,14 @@ class GargoteRules
 
         return false;
     }
+    public function est_booleen($valeur, ?string &$erreur = null): bool
+    {
+        if (is_bool($valeur) || $valeur === 0 || $valeur === 1 || $valeur === '0' || $valeur === '1') {
+            return true;
+        }
+
+        $erreur = 'Valeur booléenne attendue (true, false, 0, 1, "0" ou "1").';
+
+        return false;
+    }
 }
